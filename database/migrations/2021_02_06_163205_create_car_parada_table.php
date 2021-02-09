@@ -21,8 +21,8 @@ class CreateCarParadaTable extends Migration
             $table->timestamps();
             
             // Este es el que hace la relación de la llave foranea con la tabla paradas
-            $table->foreign('parada_id')->references('id')->on('paradas');
-            $table->foreign('car_id')->references('id')->on('cars');
+            $table->foreign('parada_id')->references('id')->on('paradas')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
         });
     }
 

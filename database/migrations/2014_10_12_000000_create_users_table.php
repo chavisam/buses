@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             
-            $table->string('rol',60);
+            $table->string('rol',60)->default('PADRE');
             $table->integer('telefono1')->nullable();
             $table->integer('telefono2')->nullable();
             $table->string('hijo1')->unique()->nullable();
@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('curso_h4')->nullable();
             $table->string('parada_casa')->nullable();
             $table->boolean('activo')->default(0);
-            $table->softDeletes();
+           
 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -39,6 +39,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

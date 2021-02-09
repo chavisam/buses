@@ -18,11 +18,11 @@ class CreateCarUserTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('car_id');
             $table->date('fecha');
-            $table->integer('plazas');
+            $table->integer('plazas')->default(1);
 
             //declaramos las claves foraneas que relacionan las tablas 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('car_id')->references('id')->on('cars');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
             $table->timestamps();
         });
     }
