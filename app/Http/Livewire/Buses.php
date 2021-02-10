@@ -1,17 +1,16 @@
 <?php
 
 namespace App\Http\Livewire;
-use App\Models\Parada;
+use App\Models\Car;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-
-class ListaParadasComponent extends Component
+class Buses extends Component
 {
     use WithPagination;
 
-    public $parada_id;
-    public $name, $hora_ida, $hora_vuelta;
+    public $car_id;
+    public $plazas;
     public $isOpen = 0;
     public $selectedItem;
     public $search;
@@ -42,19 +41,19 @@ class ListaParadasComponent extends Component
 
     public function render()
     {
-        $paradas = Parada::where('name', 'like', '%'.$this->search.'%');
+        $cars = Car::where('plazas', 'like', '%'.$this->search.'%');
         
         if($this->camp && $this->order)
         {
-            $paradas = $paradas->orderBy($this->camp , $this->order);
+            $cars = $cars->orderBy($this->camp , $this->order);
         }
 
-        $paradas = $paradas->paginate(10);
+        $cars = $cars->paginate(10);
 
 
-        return view('livewire.lista-paradas-component', [
+        return view('livewire.buses', [
 
-            'paradas' => $paradas
+            'cars' => $cars
         ]);
     }
 
@@ -63,12 +62,10 @@ class ListaParadasComponent extends Component
 
     public function edit($id)
     {
-        $parada = Parada::findOrFail($id);
-        $this->parada_id = $id;
-        $this->name = $parada->name;
-        $this->hora_ida = $parada->hora_ida;
-        $this->hora_vuelta = $parada->hora_vuelta;
-    
+        $car = Car::findOrFail($id);
+        $this->car_id = $id;
+        $this->plazas = $car->plazas;
+     
         $this->openModal();
     }
 
@@ -90,28 +87,26 @@ class ListaParadasComponent extends Component
     public function store()
     {
         $this->validate([
-            'name' => 'required|unique:paradas',
-            'hora_ida' => 'required',
-            'hora_vuelta' => 'required|after:hora_ida',
+
+            'plazas' => 'required',
+
         ]);
    
-        Parada::updateOrCreate(['id' => $this->parada_id], [
-            'name' => $this->name,
-            'hora_ida' => $this->hora_ida,
-            'hora_vuelta' => $this->hora_vuelta
+        car::updateOrCreate(['id' => $this->car_id], [
+            'plazas' => $this->plazas,
+
         ]);
   
         session()->flash('message', 
-            $this->parada_id ? 'Parada actualizada correctamente.' : 'Nueva parada creada correctamente.');
+            $this->car_id ? 'Autocar actualizado correctamente.' : 'Nuevo autocar creado correctamente.');
   
         $this->closeModal();
         $this->resetInputFields();
     }
 
     private function resetInputFields(){
-        $this->name = '';
-        $this->hora_ida = '';
-        $this->hora_vuelta = '';
+        $this->plazas = '';
+   
     }
 
         public function create()
@@ -138,9 +133,9 @@ class ListaParadasComponent extends Component
 
     public function delete()
     {      
-            Parada::destroy($this->selectedItem);
+            Car::destroy($this->selectedItem);
             $this->closeDeleteModal();
-            session()->flash('message', 'Parada eliminada correctamente.');
+            session()->flash('message', 'Autocar eliminado correctamente.');
         
     }
 }

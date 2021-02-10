@@ -15,6 +15,7 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('number');
             $table->integer('plazas');
             $table->softDeletes();
             $table->timestamps();

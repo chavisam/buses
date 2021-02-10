@@ -1,8 +1,9 @@
 <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Lista de Paradas') }}
+            {{ __('Lista de autobuses') }}
         </h2>
-    </x-slot>
+</x-slot>
+
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -26,48 +27,38 @@
                
             @endif
             @if($isOpen)
-               <x-create-parada></x-create-parada>
+               <x-create-cars></x-create-cars>
             @endif
-            <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Crear nueva Parada</button>
+            <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Crear nuevo Autocar</button>
 
-
-            <input wire:model="search" type="text" placeholder="Busca por nombre...">
 
             <table class="table-fixed w-full text-center">
                 <thead class="text-center">
                     <tr class="bg-gray-100">
-                    <th>Nº <button wire:click="sortable('id')">
+                    <th>Nº BUS <button wire:click="sortable('number')">
                         <span class="fa fa{{ $camp === 'id' ? $icon : '-arrow-circle-down' }}"></span>
                         
                     </button></th>
-                    <th>NOMBRE <button wire:click="sortable('name')">
+                    <th>Nº PLAZAS <button wire:click="sortable('plazas')">
                         <span class="fa fa{{ $camp === 'id' ? $icon : '-arrow-circle-down' }}"></span>
                         
                     </button></th>
-                    <th>IDA <button wire:click="sortable('hora_ida')">
-                        <span class="fa fa{{ $camp === 'id' ? $icon : '-arrow-circle-down' }}"></span>
-                        
-                    </button></th>
-                    <th>VUELTA <button wire:click="sortable('hora_vuelta')">
-                        <span class="fa fa{{ $camp === 'id' ? $icon : '-arrow-circle-down' }}"></span>
-                        
-                    </button></th>
+
                     <th>ACCIONES</th>
                    
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($paradas as $parada)
+                    @foreach($cars as $car)
                     <tr>
 
-                        <td scope="row" class="border px-4 py-2">{{ $parada->id }}</td>
-                        <td class="border px-4 py-2">{{ $parada->name }}</td>
-                        <td class="border px-4 py-2"><?php echo date('H:i',strtotime($parada->hora_ida)) ?> h.</td>
-                        <td class="border px-4 py-2"><?php echo date('H:i',strtotime($parada->hora_vuelta)) ?> h.</td>
+                        <td scope="row" class="border px-4 py-2">{{ $car->id }}</td>
+                        <td class="border px-4 py-2">{{ $car->plazas }}</td>
+
                         <td>
-                        <x-jet-button wire:click="edit({{ $parada->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Editar </x-jet-button>
+                        <x-jet-button wire:click="edit({{ $car->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Editar </x-jet-button>
                         
-                        <x-jet-button wire:click="selectItem({{ $parada->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</x-jet-button>
+                        <x-jet-button wire:click="selectItem({{ $car->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</x-jet-button>
                         </td>
                     </tr>
 
@@ -77,13 +68,13 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Parada</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Autocar</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    ¿Seguro que quieres eliminar esta parada?
+                                    ¿Seguro que quieres eliminar este Autocar?
                                     <br>
-                                    Se eliminará también de todas las rutas.
+                                    Se eliminarán también todas las rutas y reservas de plaza del mismo.
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" wire:click="closeDeleteModal" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -97,7 +88,7 @@
                
             </table>
 
-         {{ $paradas->links() }}
+         {{ $cars->links() }}
         </div>
     </div>
 </div>
