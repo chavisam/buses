@@ -2,20 +2,33 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @if (session()->has('message'))
-                <div class="bg-green-300 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert">
+                <div id="messages" class="bg-green-300 border-t-4 border-green-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert">
                   <div class="flex">
                     <div>
                       <p class="text-sm">{{ session('message') }}</p>
                     </div>
                   </div>
                 </div>
+
+                <script>
+                    // OCULTAR LOS MENSAJES PASADOS UN SEG Y MEDIO
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        $("#messages").fadeOut(1500);
+                    },3000);
+                });
+                </script>
+               
             @endif
-            <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Nueva Parada</button>
+            <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Crear nueva Parada</button>
             @if($isOpen)
                <x-create-parada></x-create-parada>
             @endif
+
+            <input wire:model="search" type="text" placeholder="Busca por nombre...">
+
             <table class="table-fixed w-full">
-                <thead>
+                <thead class="text-center">
                     <tr class="bg-gray-100">
                     <th>Número</th>
                     <th>Nombre</th>
@@ -34,8 +47,9 @@
                         <td class="border px-4 py-2"><?php echo date('H:i',strtotime($parada->hora_ida)) ?> h.</td>
                         <td class="border px-4 py-2"><?php echo date('H:i',strtotime($parada->hora_vuelta)) ?> h.</td>
                         <td>
-                        <button wire:click="edit({{ $parada->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Editar</button>
-                        <button wire:click="selectItem({{ $parada->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</button>
+                        <x-jet-button wire:click="edit({{ $parada->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Editar </x-jet-button>
+                        
+                        <x-jet-button wire:click="selectItem({{ $parada->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</x-jet-button>
                         </td>
                     </tr>
 
@@ -64,6 +78,8 @@
                 </tbody>
                
             </table>
+
+         {{ $paradas->links() }}
         </div>
     </div>
 </div>
@@ -78,4 +94,8 @@ window.addEventListener('closeModal', event => {
   $("#exampleModal").modal('hide');
   
 })
+
+
+
+
 </script>

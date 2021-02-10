@@ -9,23 +9,27 @@ class ListaParadasComponent extends Component
 {
     use WithPagination;
 
-    public $paradas, $parada_id;
+    public  $parada_id;
     public $name, $hora_ida, $hora_vuelta;
     public $isOpen = 0;
     public $selectedItem;
-   
-
-
+    public $search;
+    protected $queryString = ['search'];
+  
 
     public function render()
     {
-       
-        // return view('livewire.lista-paradas-component',[
-        //     'paradas' => Parada::paginate(10),
-        // ]);
 
-        $this->paradas = Parada::all();
-         return view('livewire.lista-paradas-component');
+        return view('livewire.lista-paradas-component', [
+            'paradas' => Parada::where('name', 'like', '%'.$this->search.'%')->paginate(10),
+        ]);
+       
+        //  return view('livewire.lista-paradas-component',[
+        //      'paradas' => Parada::paginate(10),
+        //  ]);
+
+        //$this->paradas = Parada::all();
+        // return view('livewire.lista-paradas-component');
     }
 
  
@@ -60,9 +64,9 @@ class ListaParadasComponent extends Component
     public function store()
     {
         $this->validate([
-            'name' => 'required',
+            'name' => 'required|unique:paradas',
             'hora_ida' => 'required',
-            'hora_vuelta' => 'required',
+            'hora_vuelta' => 'required|after:hora_ida',
         ]);
    
         Parada::updateOrCreate(['id' => $this->parada_id], [
