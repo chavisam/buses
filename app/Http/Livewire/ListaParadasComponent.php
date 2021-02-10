@@ -4,32 +4,58 @@ namespace App\Http\Livewire;
 use App\Models\Parada;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Http\Request;
 
 class ListaParadasComponent extends Component
 {
     use WithPagination;
 
-    public  $parada_id;
+    public $parada_id;
     public $name, $hora_ida, $hora_vuelta;
     public $isOpen = 0;
     public $selectedItem;
     public $search;
     protected $queryString = ['search'];
+    public $camp = 'id';
+    public $order = 'desc';
+    public $icon = '-arrow-circle-down';
+   
+
   
+    public function sortable ($camp){
+      switch ($this->order){
+        //   case null:
+        //     $this->order = 'asc';
+        //     $this->icon = '-arrow-circle-up';
+        //     break;
+        case 'asc':
+            $this->order = 'desc';
+            $this->icon = '-arrow-circle-down';
+            break;
+        case 'desc':
+            $this->order = 'asc';
+            $this->icon = '-arrow-circle-up';
+            break;
+      }
+      $this->camp = $camp;
+    }
 
     public function render()
     {
+        $paradas = Parada::where('name', 'like', '%'.$this->search.'%');
+        
+        if($this->camp && $this->order)
+        {
+            $paradas = $paradas->orderBy($this->camp , $this->order);
+        }
+
+        $paradas = $paradas->paginate(10);
+
 
         return view('livewire.lista-paradas-component', [
-            'paradas' => Parada::where('name', 'like', '%'.$this->search.'%')->paginate(10),
-        ]);
-       
-        //  return view('livewire.lista-paradas-component',[
-        //      'paradas' => Parada::paginate(10),
-        //  ]);
 
-        //$this->paradas = Parada::all();
-        // return view('livewire.lista-paradas-component');
+            'paradas' => $paradas
+        ]);
     }
 
  

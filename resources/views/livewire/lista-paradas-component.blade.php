@@ -20,20 +20,33 @@
                 </script>
                
             @endif
-            <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Crear nueva Parada</button>
             @if($isOpen)
                <x-create-parada></x-create-parada>
             @endif
+            <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Crear nueva Parada</button>
+
 
             <input wire:model="search" type="text" placeholder="Busca por nombre...">
 
             <table class="table-fixed w-full">
                 <thead class="text-center">
                     <tr class="bg-gray-100">
-                    <th>Número</th>
-                    <th>Nombre</th>
-                    <th>IDA</th>
-                    <th>VUELTA</th>
+                    <th>Nº <button wire:click="sortable('id')">
+                        <span class="fa fa{{ $camp === 'id' ? $icon : '-arrow-circle-down' }}"></span>
+                        
+                    </button></th>
+                    <th>NOMBRE <button wire:click="sortable('name')">
+                        <span class="fa fa{{ $camp === 'id' ? $icon : '-arrow-circle-down' }}"></span>
+                        
+                    </button></th>
+                    <th>IDA <button wire:click="sortable('hora_ida')">
+                        <span class="fa fa{{ $camp === 'id' ? $icon : '-arrow-circle-down' }}"></span>
+                        
+                    </button></th>
+                    <th>VUELTA <button wire:click="sortable('hora_vuelta')">
+                        <span class="fa fa{{ $camp === 'id' ? $icon : '-arrow-circle-down' }}"></span>
+                        
+                    </button></th>
                     <th>ACCIONES</th>
                    
                     </tr>
