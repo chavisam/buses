@@ -23,4 +23,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/lista_paradas', App\Http\Livewire\ListaParadasComponent::class)->name('listaparadas');
 Route::get('/buses', App\Http\Livewire\Buses::class)->name('buses');
-
+Route::get('/usuarios', App\Http\Livewire\Usuarios::class)->name('usuarios');

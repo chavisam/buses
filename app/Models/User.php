@@ -39,7 +39,9 @@ class User extends Authenticatable
         'curso_h3',
         'curso_h4',
         'parada_casa',
-        'activo'
+        'activo',
+        'telefono1',
+        'telefono2'
     ];
 
     /**
