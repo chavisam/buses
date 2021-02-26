@@ -138,4 +138,7 @@ class Buses extends Component
             session()->flash('message', 'Autocar eliminado correctamente.');
         
     }
+
+    
+
 }

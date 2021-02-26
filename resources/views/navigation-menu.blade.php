@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                    <img src="{{asset('images/logo.png')}}" alt="Logo" style="width: 70px;">
                     </a>
                 </div>
 
@@ -17,8 +17,14 @@
                     </x-jet-nav-link>
                 </div>
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('listadorutas') }}" :active="request()->routeIs('listadorutas')">
+                        {{ __('Rutas') }}
+                    </x-jet-nav-link>
+                </div>
+
                                 <!-- Navigation Links -->
-                @if(Auth::user()->id == 14)
+                @if(Auth::user()->id == 1)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('listaparadas') }}" :active="request()->routeIs('listaparadas')">
                         {{ __('Paradas') }}
@@ -34,6 +40,12 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('usuarios') }}" :active="request()->routeIs('usuarios')">
                         {{ __('Usuarios') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('rutas') }}" :active="request()->routeIs('rutas')">
+                        {{ __('Editar Rutas') }}
                     </x-jet-nav-link>
                 </div>
 

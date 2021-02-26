@@ -16,6 +16,6 @@ class Car extends Model
 
     
     public function paradas(){
-        return $this->hasMany(Parada::class);
+        return $this->belongsToMany(Parada::class);
     }
 }

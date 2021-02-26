@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Parada extends Model
+class Reserva extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'hora_ida',
-        'hora_vuelta'
+        'hijo_name',
+        'fecha',
+        'parada_name'
     ];
 
-    public function cars(){
-        return $this->belongsToMany(Car::class);
+    public function parada(){
+        return $this->hasOne(Parada::class);
     }
 }

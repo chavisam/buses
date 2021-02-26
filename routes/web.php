@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Car;
+use App\Models\Parada;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/lista_paradas', App\Http\Livewire\ListaParadasComponent::class)->name('listaparadas');
 Route::get('/buses', App\Http\Livewire\Buses::class)->name('buses');
 Route::get('/usuarios', App\Http\Livewire\Usuarios::class)->name('usuarios');
+Route::get('/rutas', App\Http\Livewire\Rutas::class)->name('rutas');
+Route::get('/listadorutas', App\Http\Livewire\ListadoRutas::class)->name('listadorutas');
+
+//para ver las relaciones de la tabla pivot car_parada
+Route::get('/y', function(){
+    // $car = Car::findOrFail(1);
+    //      return $car->paradas;
+
+    $parada = Parada::findOrFail(3);
+    return $parada->cars;
+});

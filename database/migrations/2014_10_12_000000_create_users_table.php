@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email');
             
             $table->string('rol',60)->default('PADRE');
-            $table->integer('telefono1');
+            $table->integer('telefono1')->default('000000000');
             $table->integer('telefono2')->nullable();
             $table->string('hijo1')->unique()->nullable();
             $table->string('curso_h1')->nullable();

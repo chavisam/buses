@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarsTable extends Migration
+class CreateReservasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateCarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cars', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('plazas');
-            $table->integer('disponibles');
+        Schema::create('reservas', function (Blueprint $table) {
+            $table->id();
+            $table->date('fecha');
+            $table->string('hijo_name');
+            $table->string('parada_name');
             $table->softDeletes();
             $table->timestamps();
+
+            
+
         });
     }
 
@@ -29,6 +33,6 @@ class CreateCarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buses');
+        Schema::dropIfExists('reservas');
     }
 }
