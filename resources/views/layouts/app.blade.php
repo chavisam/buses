@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <script src="https://kit.fontawesome.com/7cded88bf3.js" crossorigin="anonymous"></script>
 
+
         @livewireStyles
 
         <!-- Scripts -->
@@ -49,10 +50,48 @@
 
         @livewireScripts
 
-      
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+        <!-- <script>
+                    function ver(e){
+                        
+                    var hijo1 = document.getElementById('hijo1');
+                    var hijo2 = document.getElementById('hijo2');
+                    var hijo3 = document.getElementById('hijo3');
+                    var hijo4 = document.getElementById('hijo4');
+
+
+                    if (e==1){
+                        hijo1.style.display='block';
+                    }
+
+                    if (e==2){
+                        hijo1.style.display='block';
+                        hijo2.style.display='block';
+                    }
+
+                    if (e==3){
+                        hijo1.style.display='block';
+                        hijo2.style.display='block';
+                        hijo3.style.display='block';
+                    }
+
+
+                    if (e==4){
+                        hijo1.style.display='block';
+                        hijo2.style.display='block';
+                        hijo3.style.display='block';
+                        hijo4.style.display='block';
+                    }
+                }
+                </script> -->
+
+
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>

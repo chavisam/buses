@@ -12,7 +12,9 @@ class Reserva extends Model
     protected $fillable = [
         'hijo_name',
         'fecha',
-        'parada_name'
+        'parada_name',
+        'car_id',
+        'curso_h1'
     ];
 
     public function parada(){

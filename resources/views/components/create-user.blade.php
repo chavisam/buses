@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="exampleFormControlInput6" class="block text-gray-700 text-sm font-bold mb-2">Nombre y Apellidos hijo 1:</label>
+                            <label for="exampleFormControlInput6" class="block text-gray-700 text-sm font-bold mb-2">Appellidos y nombre hijo 1:</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                             id="exampleFormControlInput6"  wire:model="hijo1">
                             @error('hijo1') <span class="text-red-500">{{ $message }}</span>@enderror
@@ -101,7 +101,7 @@
 
 
                         <div class="mb-4">
-                            <label for="exampleFormControlInput7" class="block text-gray-700 text-sm font-bold mb-2">Nombre y Apellidos hijo 2:</label>
+                            <label for="exampleFormControlInput7" class="block text-gray-700 text-sm font-bold mb-2">Appellidos y nombre hijo 2:</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                             id="exampleFormControlInput7"  wire:model="hijo2">
                             @error('hijo2') <span class="text-red-500">{{ $message }}</span>@enderror
@@ -150,7 +150,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="exampleFormControlInput8" class="block text-gray-700 text-sm font-bold mb-2">Nombre y Apellidos hijo 3:</label>
+                            <label for="exampleFormControlInput8" class="block text-gray-700 text-sm font-bold mb-2">Appellidos y nombre hijo 3:</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                              id="exampleFormControlInput8"  wire:model="hijo3">
                             @error('hijo3') <span class="text-red-500">{{ $message }}</span>@enderror
@@ -199,7 +199,7 @@
                         </div>
                         
                         <div class="mb-4">
-                            <label for="exampleFormControlInput9" class="block text-gray-700 text-sm font-bold mb-2">Nombre y Apellidos hijo 4:</label>
+                            <label for="exampleFormControlInput9" class="block text-gray-700 text-sm font-bold mb-2">Appellidos y nombre hijo 4:</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                             id="exampleFormControlInput9"  wire:model="hijo4">
                             @error('hijo4') <span class="text-red-500">{{ $message }}</span>@enderror

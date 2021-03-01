@@ -6,22 +6,26 @@
         </h2>
     
     </x-slot>
+            
     <div aria-live="polite" aria-atomic="true" style="position: relative;z-index:999">
   <div class="toast" data-delay="2000" style="position: absolute; top: 10; right: 20px;">
     <div class="toast-header bg-success">
-      <img src="..." class="rounded mr-2" alt="...">
+   
       <strong class="mr-auto text-white">Buses App</strong>
       <small></small>
       <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-    </div>
-    <div class="toast-body">
-     Descargando Excel...
+      </div>
+      <div class="toast-body">
+      Descargando Excel...
+      </div>
     </div>
   </div>
-</div>
- 
+
+
+   
+   
 
 <div class="container">
                 <p>
@@ -31,6 +35,9 @@
                 </a>
                 @endforeach
                 </p>
+                
+
+         
 
 
 
@@ -50,7 +57,7 @@
                     
             <div class="flex flex-col">
 
-          
+                  
 
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -88,8 +95,13 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <div class="text-sm text-gray-900"><?php echo date('H:i',strtotime($parada->hora_vuelta)) ?> h.</div>
                             </td>
-                            <td></td>
+                            <td>  <livewire:hacer-reserva :stop="$parada->name" :ruta="$car->id"></livewire:hacer-reserva>  </td>
+                          
                             </tr>
+
+                        
+
+
                         @endforeach
                        </tbody>
                     </table>
@@ -97,14 +109,13 @@
                     </div>
                 </div>
              </div>
-
+        
 
     </div>
   </div>
   @endforeach
 
 </div>
-
 
 
 </div>

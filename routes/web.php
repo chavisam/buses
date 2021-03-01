@@ -28,6 +28,7 @@ Route::get('/buses', App\Http\Livewire\Buses::class)->name('buses');
 Route::get('/usuarios', App\Http\Livewire\Usuarios::class)->name('usuarios');
 Route::get('/rutas', App\Http\Livewire\Rutas::class)->name('rutas');
 Route::get('/listadorutas', App\Http\Livewire\ListadoRutas::class)->name('listadorutas');
+Route::get('/reservas', App\Http\Livewire\HacerReserva::class)->name('reservas');
 
 //para ver las relaciones de la tabla pivot car_parada
 Route::get('/y', function(){

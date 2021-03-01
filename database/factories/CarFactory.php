@@ -22,7 +22,8 @@ class CarFactory extends Factory
     public function definition()
     {
         return [
-           'plazas' => '30'
+           'plazas' => '30',
+           'disponibles' => '30'
         ];
     }
 }
