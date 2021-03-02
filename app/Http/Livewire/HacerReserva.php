@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Parada;
+use App\Models\Car;
 use App\Models\Reserva;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 
 class HacerReserva extends Component
@@ -49,7 +50,7 @@ class HacerReserva extends Component
 
         $this->validate([
            'fecha1' => 'required|date',
-           'fecha2' => 'date',
+           'fecha2' => 'after_or_equal:fecha1',
             'hijo1' => 'required' ,   
             ]);
 
@@ -58,6 +59,9 @@ class HacerReserva extends Component
                             $hijo_name = $nombre[0];
                             $hijo_numero = $nombre[1];
                    
+
+                            
+
                             if($hijo_numero==1){
 
                             $datos_hijo = User::where('hijo1', '=', $hijo_name)->get();
@@ -73,6 +77,7 @@ class HacerReserva extends Component
                                  foreach($datos_hijo as $datos)
                                     {
                                     $c = $datos->curso_h2 ;
+                                    
                                     }
 
                             }else if($hijo_numero==3){
@@ -81,7 +86,7 @@ class HacerReserva extends Component
                                     {
                                     $c = $datos->curso_h3 ;
                                     }
-                            }else{ 
+                            }else if($hijo_numero==4){ 
                                 $datos_hijo = User::where('hijo4', '=', $hijo_name)->get();
                                 foreach($datos_hijo as $datos)
                                    {
@@ -92,49 +97,78 @@ class HacerReserva extends Component
                             };
 
 
+    if($this->fecha1 != $this->fecha2){
+                        
+                        // CALCULO DE LOS DÍAS LABORABLES ENTRE LAS DOS FECHAS 
+                        $fecha1=strtotime($this->fecha1);
+                        $fecha2=strtotime($this->fecha2);
+                        $diasferiados = array();
 
-            
-            // CALCULO DE LOS DÍAS LABORABLES ENTRE LAS DOS FECHAS 
-             $fecha1=strtotime($this->fecha1);
-             $fecha2=strtotime($this->fecha2);
-             $diasferiados = array();
+                        // Incremento en 1 dia
+                            $diainc = 24*60*60;
+                
+                
+                        // Se recorre desde la fecha de inicio a la fecha fin, incrementando en 1 dia
+                        for ($midia = $fecha1; $midia <= $fecha2; $midia += $diainc) {
 
-             // Incremento en 1 dia
-                $diainc = 24*60*60;
+
+                                // Si el dia indicado, no es sabado o domingo es habil
+                                if (!in_array(date('N', $midia), array(6,7))) { // DOC: http://www.php.net/manual/es/function.date.php
+                                        // Si no es un dia feriado entonces es habil
+                                        if (!in_array(date('Y-m-d', $midia), $diasferiados)) {
+
+
+                                            Reserva::create([
+                                                'fecha' => date("Y-m-d", $midia),
+                                                'car_id' => $this->ruta,
+                                                'parada_name' => $this->stop,
+                                                'hijo_name' => strtoUpper($hijo_name),
+                                                'curso' => $c
+                                    
+                                            ]);
+                                        }
+                                }
+                            
+                        }
        
-       
-        // Se recorre desde la fecha de inicio a la fecha fin, incrementando en 1 dia
-        for ($midia = $fecha1; $midia <= $fecha2; $midia += $diainc) {
+                    } //fin del if fecha 2
+            else{
+                        $fecha1=strtotime($this->fecha1);
+                        $fecha_inicial = $this->fecha1;
+                        $ruta = $this->ruta;
+                   
 
+                     $ocupadas = Reserva::where(['fecha' => $fecha_inicial , 'car_id' => $ruta ])->count();
+                     $plazas_totales = Car::find($this->ruta)->plazas;
+                     $disponibles = $plazas_totales - $ocupadas;
 
-                // Si el dia indicado, no es sabado o domingo es habil
-                if (!in_array(date('N', $midia), array(6,7))) { // DOC: http://www.php.net/manual/es/function.date.php
-                        // Si no es un dia feriado entonces es habil
-                        if (!in_array(date('Y-m-d', $midia), $diasferiados)) {
-
+                        if($disponibles > 0){
 
                             Reserva::create([
-                                'fecha' => date("Y-m-d", $midia),
+                                'fecha' => date("Y-m-d", $fecha1),
                                 'car_id' => $this->ruta,
                                 'parada_name' => $this->stop,
                                 'hijo_name' => strtoUpper($hijo_name),
                                 'curso' => $c
-                    
-                            ]);
+                              ]);
+
+                              session()->flash('status', 'PLAZAS RESERVADAS CORRECTAMENTE');
+
+                                return redirect()->to('/listadorutas');
+                        
+
+                                }else{
+                                    return back()->with('status' , 'NO HAY PLAZAS DISPONIBLES PARA ESE DÍA');
+                                }
                         }
-                }
-               
-        }
-       
-        session()->flash('message', 
-        $this->fecha1 ? 'Plazas reservadas correctamente' :'Algo no funciona');
+
+
+
+
            
         $this-> resetFiles();
         $this->closeModal();
     }
-
-
-
 
 
 

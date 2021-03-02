@@ -14,7 +14,7 @@ class Reserva extends Model
         'fecha',
         'parada_name',
         'car_id',
-        'curso_h1'
+        'curso'
     ];
 
     public function parada(){

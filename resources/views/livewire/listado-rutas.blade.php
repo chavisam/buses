@@ -24,7 +24,11 @@
   </div>
 
 
-   
+  <script>
+                function toast(){
+                  $('.toast').toast('show');
+                }
+                </script>  
    
 
 <div class="container">
@@ -35,91 +39,73 @@
                 </a>
                 @endforeach
                 </p>
+</div>
                 
 
          
 
 
 
-<div class="row">
-
 @foreach($cars as $car)
-  <div class="col-md-12">
-    <div class="collapse " id="multiCollapse{{$car->id}}">
-     
-       
-              <script>
-              function toast(){
-                $('.toast').toast('show');
-               
-              }
-              </script>      
-                    
-            <div class="flex flex-col">
-
-                  
-
-                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                           <h1 class="text-primary py-3">RUTA:{{$car->id}} </h1> Parada
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Hora de ida
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Hora de vuelta  
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><button onclick="toast()" class="btn-success btn hover:bg-green-300">Descargar Excel</button></th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($car->paradas as $parada)
-                            <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                    {{$parada->name}}
-                                    </div>
+    <div class="container collapse" id="multiCollapse{{$car->id}}">
+      <div class="row " >
+                    <div class="col-md-6 col-sm-12">
+                        <div class="flex flex-col">
+                            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-200 table-responsive">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                      <h1 class="text-primary py-3">RUTA:{{$car->id}} </h1> Parada <button onclick="toast()" class="btn-success btn hover:bg-green-300">Descargar Excel</button>
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Hora de ida
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Hora de vuelta  
+                                        </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach($car->paradas as $parada)
+                                        <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">
+                                                {{$parada->name}}
+                                                </div>
+                                                <livewire:hacer-reserva :stop="$parada->name" :ruta="$car->id"></livewire:hacer-reserva>
+                                            </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900"><?php echo date('H:i',strtotime($parada->hora_ida)) ?> h.</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <div class="text-sm text-gray-900"><?php echo date('H:i',strtotime($parada->hora_vuelta)) ?> h.</div>
+                                        </td>
+                     
+                                      
+                                        </tr>
+                                    @endforeach
+                                  </tbody>
+                                </table>
+                                
                                 </div>
+                                
                                 </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900"><?php echo date('H:i',strtotime($parada->hora_ida)) ?> h.</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <div class="text-sm text-gray-900"><?php echo date('H:i',strtotime($parada->hora_vuelta)) ?> h.</div>
-                            </td>
-                            <td>  <livewire:hacer-reserva :stop="$parada->name" :ruta="$car->id"></livewire:hacer-reserva>  </td>
-                          
-                            </tr>
+                              
+                            </div>
+                        </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <h2>Disponibilidad de la ruta {{$car->id}}</h2>
+                <livewire:calendar :ruta="$car->id"></livewire:calendar>
+              </div> 
 
-                        
-
-
-                        @endforeach
-                       </tbody>
-                    </table>
-                    </div>
-                    </div>
-                </div>
-             </div>
-        
-
+      </div>
     </div>
-  </div>
-  @endforeach
-
-</div>
-
-
-</div>
-
-</div>
-
-
+@endforeach

@@ -12,14 +12,15 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <script src="https://kit.fontawesome.com/7cded88bf3.js" crossorigin="anonymous"></script>
-
-
+        <link href={{asset('css/main.css')}} rel='stylesheet' />
+      
         @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
-   
+     
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
 
    
@@ -31,6 +32,10 @@
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
 
+
+            
+
+
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
@@ -40,8 +45,10 @@
                 </header>
             @endif
 
+            @include('partials.mensajes')
             <!-- Page Content -->
             <main>
+           
                 {{ $slot }}
             </main>
         </div>
@@ -85,9 +92,10 @@
                 </script> -->
 
 
-  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+
+
+        <script src="https://kit.fontawesome.com/7cded88bf3.js" crossorigin="anonymous"></script>
 
 
 

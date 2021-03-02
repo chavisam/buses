@@ -1,4 +1,4 @@
-      
+
 
 
 <div class="flex items-start justify-center  px-4 pb-40 text-center " >
@@ -7,6 +7,17 @@
         </div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
         <div class="inline-block align-top bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+     
+        @if(session('status'))
+  <div id="messages" class="bg-red-300 border-t-4 border-red-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert">
+                  <div class="flex">
+                    <div>
+                      <p class="text-sm">{{ session('status') }}</p>
+                    </div>
+                  </div>
+                </div>
+  @endif
+       
             <form>
               
             <div class="bg-white px-4 pt-3 ">
@@ -25,7 +36,9 @@
                 </div>
 
 
-
+ 
+ 
+    <div id='calendar'></div>
 
 
           
@@ -139,7 +152,7 @@
                         </div>
                 </div>
 
-
+      
 
 
                     <div class="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4" >
@@ -147,16 +160,16 @@
                              ( <small>Si solo marca una fecha en éste campo, se hará la reserva para este día solamente)</small></label>
                        
                         <input type="date"  class="form-control datepicker" id="fecha1" wire:model="fecha1">
-                        @error('fecha') <span class="text-red-500">{{ $message }}</span>@enderror
+                        @error('fecha1') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
 
 
                     <div class="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4" >
                         <label for="fecha2" class="block text-gray-700 text-sm font-bold mb-2" id="fecha2">HASTA:
-                            ( <small>Si marca una fecha de inicio y fin, se hará la reserva para todos los días LABORABLES en ese rango de fechas)</small>
+                            ( <small>Si marca el mismo día que en el campo anterior, solo se reservará plaza para ese día. Si no, se hará la reserva para todos los días LABORABLES en ese rango de fechas)</small>
                         </label>
                         <input type="date"  class="form-control "  wire:model="fecha2">
-                        @error('fecha') <span class="text-red-500">{{ $message }}</span>@enderror
+                        @error('fecha2') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
 
 
@@ -177,4 +190,3 @@
         </div>
     </div>
 </div>
-
