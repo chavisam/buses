@@ -148,6 +148,8 @@ return [
 
     'attributes' => [
         'name' => 'nombre',
+        'fecha2' => 'Hasta',
+        'fecha1' => 'Desde'
     ],
 
 ];

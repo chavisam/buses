@@ -23,10 +23,9 @@
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
 
-   
-
     </head>
     <body class="font-sans antialiased">
+
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">
@@ -87,7 +86,6 @@
                     }
                 }
                 </script> -->
-
 
 
 

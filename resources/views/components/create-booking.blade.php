@@ -36,12 +36,6 @@
                 </div>
 
 
- 
- 
-    <div id='calendar'></div>
-
-
-          
 
                 <!-- <div class="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                         <div class="mb-4">
@@ -153,13 +147,16 @@
                 </div>
 
       
+      <?php 
+      $hoy = date('Y-m-d');
+      ?>
 
 
                     <div class="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4" >
                         <label for="fecha1" class="block text-gray-700 text-sm font-bold mb-2">DESDE:
                              ( <small>Si solo marca una fecha en éste campo, se hará la reserva para este día solamente)</small></label>
                        
-                        <input type="date"  class="form-control datepicker" id="fecha1" wire:model="fecha1">
+                        <input type="date" min="<?php echo $hoy ?>" class="form-control datepicker" id="fecha1" wire:model="fecha1">
                         @error('fecha1') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
 

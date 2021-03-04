@@ -3,17 +3,17 @@
 namespace App\Http\Livewire;
 
 use App\Models\Car;
+use App\Models\Parada;
 use App\Models\Reserva;
 use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
 use Livewire\Component;
 
 class HacerReserva extends Component
 {
    
     public $isOpen = 0;
-    public $stop;
-    public $ruta;
+    public $stop=9999;
+    public $ruta=0;
     public $hijos;
     public $fecha1;
     public $fecha2;
@@ -23,6 +23,10 @@ class HacerReserva extends Component
     public $hijo4;
     public $curso_h1;
     public $c;
+    public $paradas;
+    public $cars;
+    public $parada_id;
+ 
 
     
     public function openModal(){
@@ -35,20 +39,22 @@ class HacerReserva extends Component
         $this->isOpen = false;
     }
 
-    public function mount($stop,$ruta){
-        
-        $this->stop = $stop;
-        $this->ruta = $ruta;
-        
-        $this->hijos = User::OrderByRaw('hijo1')
-                    ->get();
+    public function mount(){
+              
+        $this->hijos = User::OrderByRaw('hijo1')->get();
+        $this->cars = Car::all();
+        $this->paradas = Parada::OrderByRaw('hora_ida')->get();
+       
+            $stop = $this->stop;
 
-    }
+      
+}
 
 
     public function store(){
 
         $this->validate([
+            'paradas' => '',
            'fecha1' => 'required|date',
            'fecha2' => 'after_or_equal:fecha1',
             'hijo1' => 'required' ,   
@@ -126,6 +132,9 @@ class HacerReserva extends Component
                                                 'curso' => $c
                                     
                                             ]);
+
+                                            session()->flash('status', 'PLAZAS RESERVADAS CORRECTAMENTE');
+                                            return redirect()->to('/listadorutas');
                                         }
                                 }
                             
@@ -184,7 +193,17 @@ class HacerReserva extends Component
 
     
     public function render()
+
     {
-        return view('livewire.hacer-reserva');
+
+        if($this->stop != 9999){
+            $this->parada_id = Parada::find($this->stop);
+
+   }
+
+
+        return view('livewire.hacer-reserva', [
+            'stop' => $this->stop,
+        ]);
     }
 }
