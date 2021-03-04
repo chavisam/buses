@@ -144,13 +144,14 @@ class HacerReserva extends Component
 
                         if($disponibles > 0){
 
-                            Reserva::create([
+                            Reserva::updateOrCreate(['fecha' => date("Y-m-d", $fecha1) , 'hijo_name' => strtoUpper($hijo_name)], [
                                 'fecha' => date("Y-m-d", $fecha1),
                                 'car_id' => $this->ruta,
                                 'parada_name' => $this->stop,
                                 'hijo_name' => strtoUpper($hijo_name),
                                 'curso' => $c
-                              ]);
+                            ]);
+                           
 
                               session()->flash('status', 'PLAZAS RESERVADAS CORRECTAMENTE');
 

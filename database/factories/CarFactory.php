@@ -23,7 +23,7 @@ class CarFactory extends Factory
     {
         return [
            'plazas' => '30',
-           'disponibles' => '30'
+
         ];
     }
 }
