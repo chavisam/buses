@@ -20,7 +20,9 @@ class Calendar extends Component
     public $diainc = 24*60*60;
 
 
-    public function mount(){
+
+    public function mount($ruta){
+        $this->ruta = $ruta;
         $this->hoy = strtotime(date('Y-m-d'));
         $this->fin_curso = strtotime('2021-06-19') ;
 
@@ -32,31 +34,21 @@ class Calendar extends Component
                     if (!in_array(date('Y-m-d', $midia), $this->diasferiados)) {
                             array_push($this->diashabiles, date('Y-m-d', $midia));
 
-                            $this->ocupadas = Reserva::where(['fecha' => date('Y-m-d', $midia) , 'car_id' => $this->ruta ])->count();
+                            $this->ocupadas = Reserva::where(['fecha' => date('Y-m-d', $midia) , 'car_id' => $ruta ])->count();
 
                             array_push($this->ocupacion, $this->ocupadas);
 
                     }
             }
     }
-   
-    
-
-
-     
-
-
+  
      $this->plazas_totales = Car::find($this->ruta)->plazas;
-
-
-
-
-
     }
 
 
     public function render()
     {
+        
         return view('livewire.calendar');
     }
 }

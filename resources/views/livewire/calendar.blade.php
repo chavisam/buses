@@ -1,6 +1,7 @@
 <div>
-          
-    <script src={{asset('js/main.js')}}></script>
+<link href={{asset('css/main.css')}} rel='stylesheet' />
+<script src={{asset('js/main.js')}}></script>
+
     <script>
 
       document.addEventListener('DOMContentLoaded', function() {
@@ -58,6 +59,10 @@
 
     </script>
 
-    <div id='calendar{{$ruta}}'></div>
+<h1>Disponibilidad de la ruta: {{$ruta}}</h1>
 
+    <div class="container">
+      <div id='calendar{{$ruta}}'></div>
+      
+    </div>
 </div>

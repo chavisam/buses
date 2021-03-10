@@ -10,10 +10,12 @@ class ListadoRutas extends Component
 {
     public $cars, $paradas;
     public $isOpen = 0;
+    public $ruta;
+    public $car;
 
     
-    public function openModal(){
-       
+    public function openModal($car){
+        $this->car = $car;
         $this->isOpen = true;
     }
 
@@ -22,6 +24,7 @@ class ListadoRutas extends Component
     }
 
     public function mount(){
+        
         $this->cars = Car::all();
         $this->paradas = Parada::all();
     }

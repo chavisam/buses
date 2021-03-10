@@ -12,15 +12,12 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <link href={{asset('css/main.css')}} rel='stylesheet' />
+        <link href="{{asset('css/main.css')}}" rel='stylesheet' />
       
         @livewireStyles
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
-     
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+
 
 
     </head>
@@ -53,45 +50,32 @@
 
         @livewireScripts
 
-        <!-- <script>
-                    function ver(e){
-                        
-                    var hijo1 = document.getElementById('hijo1');
-                    var hijo2 = document.getElementById('hijo2');
-                    var hijo3 = document.getElementById('hijo3');
-                    var hijo4 = document.getElementById('hijo4');
-
-
-                    if (e==1){
-                        hijo1.style.display='block';
-                    }
-
-                    if (e==2){
-                        hijo1.style.display='block';
-                        hijo2.style.display='block';
-                    }
-
-                    if (e==3){
-                        hijo1.style.display='block';
-                        hijo2.style.display='block';
-                        hijo3.style.display='block';
-                    }
-
-
-                    if (e==4){
-                        hijo1.style.display='block';
-                        hijo2.style.display='block';
-                        hijo3.style.display='block';
-                        hijo4.style.display='block';
-                    }
-                }
-                </script> -->
-
-
-
-
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}" defer></script>
+     
+  
+                
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script src="{{asset('js/main.js')}}"></script>
 <script src="https://kit.fontawesome.com/7cded88bf3.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    </body>
+<script>
+                    // OCULTAR LOS MENSAJES PASADOS UN SEG Y MEDIO
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        $("#error").fadeOut(1500);
+                    },3000);
+                
+
+             
+                    setTimeout(function() {
+                        $("#status").fadeOut(1500);
+                    },3000);
+
+                    
+                });
+                </script>
+</body>
 </html>

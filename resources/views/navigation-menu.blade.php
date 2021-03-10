@@ -55,7 +55,13 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('book') }}" :active="request()->routeIs('book')">
-                        {{ __('RESERVAR') }}
+                        {{ __('Reservar') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('dispo') }}" :active="request()->routeIs('dispo')">
+                        {{ __('Disponibilidad') }}
                     </x-jet-nav-link>
                 </div>
 

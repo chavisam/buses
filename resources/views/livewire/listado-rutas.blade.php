@@ -1,4 +1,4 @@
-
+<div>
 
 <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -6,7 +6,13 @@
         </h2>
     
     </x-slot>
-            
+
+    <script>
+                function toast(){
+                  $('.toast').toast('show');
+                }
+                </script>  
+
     <div aria-live="polite" aria-atomic="true" style="position: relative;z-index:999">
   <div class="toast" data-delay="2000" style="position: absolute; top: 10; right: 20px;">
     <div class="toast-header bg-success">
@@ -24,11 +30,6 @@
   </div>
 
 
-  <script>
-                function toast(){
-                  $('.toast').toast('show');
-                }
-                </script>  
    
 
 <div class="container py-2 text-center">
@@ -102,9 +103,12 @@
 
 
     @endforeach
- </div>   
 
+
+ </div>   
  <!-- <div class="col-md-6 col-sm-12" >
                       <h1>Disponibilidad de la ruta {{$car->id}}</h1>
                       <livewire:calendar :ruta="$car->id"></livewire:calendar>
         </div>  -->
+        
+</div>

@@ -29,10 +29,10 @@ Route::get('/usuarios', App\Http\Livewire\Usuarios::class)->name('usuarios');
 Route::get('/rutas', App\Http\Livewire\Rutas::class)->name('rutas');
 Route::get('/listadorutas', App\Http\Livewire\ListadoRutas::class)->name('listadorutas');
 Route::get('/book', App\Http\Livewire\HacerReserva::class)->name('book');
+Route::get('/dispo', App\Http\Livewire\Dispo::class)->name('dispo');
+Route::get('/calendar', App\Http\Livewire\Calendar::class)->name('calendar');
 
-Route::get('/calendar' , function(){
-    return view('components.calendar');
-});
+
 
 //para ver las relaciones de la tabla pivot car_parada
 Route::get('/y', function(){
