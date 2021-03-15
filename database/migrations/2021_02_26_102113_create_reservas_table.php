@@ -20,6 +20,8 @@ class CreateReservasTable extends Migration
             $table->string('parada_name');
             $table->UnsignedBiginteger('car_id');
             $table->string('curso');
+            $table->string('telefono1');
+            $table->string('telefono2');
             $table->softDeletes();
             $table->timestamps();
 

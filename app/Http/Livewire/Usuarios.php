@@ -42,18 +42,17 @@ class Usuarios extends Component
             //el email debe ser único excepto el de el usuario que se está editando
             'email' => 'required|email|unique:users,email,'.$id,
             'telefono1' => 'required|digits:9|',
-            'parada_casa' => 'required',
             'activo' => 'required',
             'hijo1' => 'required|different:hijo2|different:hijo3|different:hijo4|unique:users,hijo1,' .$id ,
             'curso_h1' => 'required',
             ]);
 
-            if($this->telefono2!=""){
+            if($this->telefono2!="0"){
                 $this->validate([
                     'telefono2' => 'numeric|digits:9',
                 ]);
          
-            }else{$this->telefono2=0;}
+            }else{$this->telefono2="000000000";}
 
             if($this->hijo2!= ""){
         $this->validate([
@@ -228,13 +227,18 @@ class Usuarios extends Component
             //el email debe ser único excepto el de el usuario que se está editando
             'email' => 'required|email|unique:users,email',
             'telefono1' => 'required|digits:9|',
-            'telefono2' => 'digits:9|',
-            'parada_casa' => 'required',
             'activo' => 'required',
             'hijo1' => 'required|different:hijo2|different:hijo3|different:hijo4|unique:users,hijo1' ,
             'curso_h1' => 'required',
     
             ]);
+
+            if($this->telefono2!="0"){
+                $this->validate([
+                    'telefono2' => 'numeric|digits:9',
+                ]);
+         
+            }else{$this->telefono2="000000000";}
 
             if($this->hijo2!=""){
         $this->validate([

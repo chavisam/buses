@@ -8,7 +8,9 @@
         var calendarEl = document.getElementById('calendar<?php echo $ruta ?>');
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
+          showNonCurrentDates: false,
           locale:'es',
+          weekends:false,
           firstDay: 1,
           header: {
           left:   'prev,next',

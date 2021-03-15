@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                    <img src="{{asset('images/logo.png')}}" alt="Logo" style="width: 70px;">
+                    <img src="{{asset('images/bus.png')}}" alt="Logo" style="width: 100px;">
                     </a>
                 </div>
 
@@ -26,26 +26,7 @@
                 </div>
 
                                 <!-- Navigation Links -->
-                @if(Auth::user()->id == 1)
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('rutas') }}" :active="request()->routeIs('rutas')">
-                        {{ __('Editar Rutas') }}
-                    </x-jet-nav-link>
-                </div>
-
-                
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('buses') }}" :active="request()->routeIs('buses')">
-                        {{ __('Buses') }}
-                    </x-jet-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('usuarios') }}" :active="request()->routeIs('usuarios')">
-                        {{ __('Usuarios') }}
-                    </x-jet-nav-link>
-                </div>
+                @if(Auth::user()->rol == "ADMIN")
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('listaparadas') }}" :active="request()->routeIs('listaparadas')">
@@ -54,8 +35,20 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('book') }}" :active="request()->routeIs('book')">
-                        {{ __('Reservar') }}
+                    <x-jet-nav-link href="{{ route('buses') }}" :active="request()->routeIs('buses')">
+                        {{ __('Buses') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('rutas') }}" :active="request()->routeIs('rutas')">
+                        {{ __('Editar Rutas') }}
+                    </x-jet-nav-link>
+                </div>
+           
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('usuarios') }}" :active="request()->routeIs('usuarios')">
+                        {{ __('Usuarios') }}
                     </x-jet-nav-link>
                 </div>
 
@@ -65,9 +58,98 @@
                     </x-jet-nav-link>
                 </div>
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('book') }}" :active="request()->routeIs('book')">
+                        {{ __('Reservar') }}
+                    </x-jet-nav-link>
+                </div>
 
+               <!-- Settings Dropdown -->
+               <div class="ml-3 relative mt-3">
+                    <x-jet-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+   
+                                <span class="inline-flex rounded-md">
+                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    {{ __('Listados') }}
+
+                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </span>
+                      
+                        </x-slot>
+
+                        <x-slot name="content">
+
+
+
+                        @foreach($cars as $car)
+                            <x-jet-dropdown-link href="{{ route('listados' , ['ruta' => $car->id] ) }}">
+                                {{ __('Ruta') }} {{ $car->id}}
+                            </x-jet-dropdown-link>
+                            <div class="border-t border-gray-100"></div>
+                        @endforeach
+
+                        </x-slot>
+                    </x-jet-dropdown>
+                </div>
 
              @endif
+
+
+
+
+
+
+
+
+
+             @if(Auth::user()->rol == "MONITOR RUTA")
+             
+                 <!-- Settings Dropdown -->
+               <div class="ml-3 relative mt-3">
+                    <x-jet-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+   
+                                <span class="inline-flex rounded-md">
+                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    {{ __('Listados') }}
+
+                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </span>
+                      
+                        </x-slot>
+
+                        <x-slot name="content">
+
+
+
+                        @foreach($cars as $car)
+                            <x-jet-dropdown-link href="{{ route('listados' , ['ruta' => $car->id] ) }}">
+                                {{ __('Ruta') }} {{ $car->id}}
+                            </x-jet-dropdown-link>
+                            <div class="border-t border-gray-100"></div>
+                        @endforeach
+
+                        </x-slot>
+                    </x-jet-dropdown>
+                </div>
+             
+             @endif
+
+
+
+
+
+
+
+
+             
 
             </div>
 

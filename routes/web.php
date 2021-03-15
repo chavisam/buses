@@ -31,7 +31,7 @@ Route::get('/listadorutas', App\Http\Livewire\ListadoRutas::class)->name('listad
 Route::get('/book', App\Http\Livewire\HacerReserva::class)->name('book');
 Route::get('/dispo', App\Http\Livewire\Dispo::class)->name('dispo');
 Route::get('/calendar', App\Http\Livewire\Calendar::class)->name('calendar');
-
+Route::get('/listados/{ruta}', App\Http\Livewire\Listados::class)->name('listados');
 
 
 //para ver las relaciones de la tabla pivot car_parada

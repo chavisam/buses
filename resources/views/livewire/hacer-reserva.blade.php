@@ -15,7 +15,7 @@
         <div class="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                  <div class="mb-4">
                      <label for="stop" class="block text-gray-700 text-sm font-bold mb-2">PARADAS:</label>
-                     <select wire:model="stop" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="al1" >
+                     <select wire:model="stop" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stop" >
                      <option value="" selected>---</option>
                  @foreach($paradas as $parada)
 
@@ -30,17 +30,26 @@
                    <div class="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                              <div class="mb-4">
                                  <label for="ruta" class="block text-gray-700 text-sm font-bold mb-2">RUTA:</label>
-                                 <select wire:model="ruta" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  >
-                                 <option value="1" selected>---</option>
+                                 <select wire:model="ruta" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ruta" >
+                                 <option value="" disabled>---</option>
                                  @if($stop != 9999)
-                                 @foreach ($parada_id->cars as $car) 
+                                    @forelse ($parada_id->cars as $car) 
      
                                      <option value="{{ $car->pivot->car_id }}" >{{ $car->pivot->car_id }}</option>
                                        
-                             @endforeach  
-                             @endif
-                                 </select>
-                                 @error('ruta') <span class="text-red-500">{{ $message }}</span>@enderror</div>
+                                    @empty
+                                 
+                                       <option value="" disabled>PARADA NO INCORPORADA A NINGUNA RUTA POR AHORA</option>
+                                   
+
+                                    @endforelse
+                                 
+                                    
+                                @endif
+                                     </select>
+                                     @error('ruta') <span class="text-red-500">{{ $message }}</span>@enderror
+                                 </div>
+                                
                      </div>                      
      
                      <div class="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4" id="hijo1">

@@ -14,8 +14,8 @@ class HacerReserva extends Component
 {
    
     public $isOpen = 0;
-    public $stop=9999;
-    public $ruta= 1;
+    public $stop = 9999;
+    public $ruta;
     public $hijos;
     public $fecha1;
     public $fecha2;
@@ -60,9 +60,7 @@ public function render()
 }
 
 
-    return view('livewire.hacer-reserva', [
-        'stop' => $this->stop,
-    ]);
+    return view('livewire.hacer-reserva');
 }
 
 
@@ -71,7 +69,8 @@ public function render()
     public function store(){
 
         $this->validate([
-            'ruta' => 'required',
+            'stop' => 'required',
+            'ruta' => 'required|numeric',
            'fecha1' => 'required|date',
            'fecha2' => 'after_or_equal:fecha1',
             'hijo1' => 'required' ,   
@@ -97,6 +96,8 @@ public function render()
                             foreach($datos_hijo as $datos)
                                 {
                                 $c = $datos->curso_h1 ;
+                                $t1 = $datos->telefono1;
+                                $t2 = $datos->telefono2;
                              
                                 }
 
@@ -106,7 +107,8 @@ public function render()
                                  foreach($datos_hijo as $datos)
                                     {
                                     $c = $datos->curso_h2 ;
-                                    
+                                    $t1 = $datos->telefono1;
+                                $t2 = $datos->telefono2;
                                     }
 
                             }else if($hijo_numero==3){
@@ -114,12 +116,16 @@ public function render()
                                  foreach($datos_hijo as $datos)
                                     {
                                     $c = $datos->curso_h3 ;
+                                    $t1 = $datos->telefono1;
+                                $t2 = $datos->telefono2;
                                     }
                             }else if($hijo_numero==4){ 
                                 $datos_hijo = User::where('hijo4', '=', $hijo_name)->get();
                                 foreach($datos_hijo as $datos)
                                    {
                                    $c = $datos->curso_h4 ;
+                                   $t1 = $datos->telefono1;
+                                $t2 = $datos->telefono2;
                                    }  
                                    
                                 
@@ -150,7 +156,7 @@ public function render()
                                 {
                                     //               
                                 }else{
-                                   
+                                  //  session()->flash('flash.banner', 'Yay it works!');
                                     session()->flash('error' ,  'El alumno '. $hijo_name . ', ya tiene plaza para el día '. date("d-M", $midia) . ' en la ruta '. $this->ruta);
                                     return redirect()->to('/book');
                                 }
@@ -198,7 +204,9 @@ public function render()
                                                 'car_id' => $this->ruta,
                                                 'parada_name' => $n,
                                                 'hijo_name' => strtoUpper($hijo_name),
-                                                'curso' => $c
+                                                'curso' => $c,
+                                                'telefono1' => $t1,
+                                                'telefono2' => $t2
                                                 ]);
 
                                             
@@ -267,7 +275,9 @@ public function render()
                                 'car_id' => $this->ruta,
                                 'parada_name' => $n,
                                 'hijo_name' => strtoUpper($hijo_name),
-                                'curso' => $c
+                                'curso' => $c,
+                                'telefono1' => $t1,
+                                'telefono2' => $t2
                             ]);
                            
 

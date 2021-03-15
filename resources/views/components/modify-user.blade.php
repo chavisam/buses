@@ -23,13 +23,20 @@
                              id="exampleFormControlInput2"  wire:model="email">
                             @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
-<!-- 
+
+                        
                         <div class="mb-4">
-                            <label for="exampleFormControlInput3" class="block text-gray-700 text-sm font-bold mb-2">Tipo de Cuenta:</label>
-                            <input type="text"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            <label for="exampleFormControlInput3" class="block text-gray-700 text-sm font-bold mb-2">Tipo de cuenta:</label>
+                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                             id="exampleFormControlInput3"  wire:model="rol">
+                            <option value=null>---</option> 
+                                <option value="PADRE">PADRE</option>
+                                <option value="MONITOR RUTA">MONITOR RUTA</option>
+                                <option value="PROFESOR">PROFESOR</option>
+                                <option value="ADMIN">ADMIN</option>
+                            </select>
                             @error('rol') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </div> -->
+                        </div>
 
                         <div class="mb-4">
                             <label for="telefono1" class="block text-gray-700 text-sm font-bold mb-2">Teléfono 1:</label>
